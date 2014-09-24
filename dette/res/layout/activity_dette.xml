@@ -1,0 +1,171 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <!-- date -->
+
+    <TableRow android:layout_marginTop="@dimen/padding_small" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/col_date_title" />
+
+        <EditText
+            android:id="@+id/newDate"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="date" />
+    </TableRow>
+
+    <!-- heure -->
+
+    <TableRow android:layout_marginTop="@dimen/padding_small" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/col_heure_title" />
+
+        <EditText
+            android:id="@+id/newHeure"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="time" />
+    </TableRow>
+
+    <!-- durée -->
+
+    <!-- gauche -->
+
+    <TableRow android:layout_marginTop="@dimen/padding_small" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/col_gauche_title" />
+
+        <EditText
+            android:id="@+id/newGauche"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="time" />
+    </TableRow>
+
+    <!-- droite -->
+
+    <TableRow android:layout_marginTop="@dimen/padding_small" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/col_droite_title" />
+
+        <EditText
+            android:id="@+id/newDroite"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="time" />
+    </TableRow>
+
+    <!-- ordre -->
+
+    <TableRow android:layout_marginTop="@dimen/padding_small" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/newCommencerPar" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupCommencerPar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/newParGauche"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/col_gauche_title" />
+
+            <RadioButton
+                android:id="@+id/newParDroite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/col_droite_title" />
+        </RadioGroup>
+    </TableRow>
+
+    <TableRow android:layout_marginTop="@dimen/padding_small" >
+
+        <CheckBox
+            android:id="@+id/newPipi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/col_pipi_title" />
+
+        <CheckBox
+            android:id="@+id/newCaca"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/col_caca_title" />
+    </TableRow>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_large"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/newStartGauche"
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:layout_weight="0.98"
+            android:text="@string/startGauche" />
+
+        <Button
+            android:id="@+id/newStartDroite"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_weight="0.98"
+            android:text="@string/startDroite" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_large"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <Button
+            android:id="@+id/newValider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.10"
+            android:text="@string/valider" />
+
+        <Button
+            android:id="@+id/newAnnuler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.00"
+            android:text="@string/annuler" />
+    </LinearLayout>
+
+</TableLayout>

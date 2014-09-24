@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--item -->
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="horizontal"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+  <TextView
+      android:id="@+id/date"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="@dimen/padding_small"
+      android:layout_weight="2" />
+    
+  <TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:layout_weight="1"
+   android:layout_marginRight="@dimen/padding_small"
+   android:id="@+id/heure"
+  />
+  
+  <TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:layout_weight="1"
+   android:layout_marginRight="@dimen/padding_small"
+   android:id="@+id/sein_gauche"
+  />
+  
+  <TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:layout_weight="1"
+   android:layout_marginRight="@dimen/padding_small"
+   android:id="@+id/sein_droit"
+  />
+  
+  <TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:layout_weight="1"
+   android:layout_marginRight="@dimen/padding_small"
+   android:id="@+id/commencer"
+  />
+  
+  <TextView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:layout_weight="1"
+   android:layout_marginRight="@dimen/padding_small"
+   android:id="@+id/pipi"
+  />
+  
+  <TextView
+      android:id="@+id/caca"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="1" />
+
+</LinearLayout>

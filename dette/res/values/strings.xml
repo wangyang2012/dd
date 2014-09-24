@@ -1,0 +1,25 @@
+<resources>
+
+    <string name="app_name">TétéRecord</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="btn_consultation">Consultation</string>
+    <string name="btn_quitter">Quitter</string>
+    <string name="btn_dette">Commecer</string>
+    <string name="col_date_title">Date</string>
+    <string name="col_heure_title">Heure</string>
+    <string name="col_gauche_title">Gauche</string>
+    <string name="col_droite_title">Droite</string>
+    <string name="col_commencer_title">Début</string>
+    <string name="col_pipi_title">Pipi</string>
+    <string name="col_caca_title">Caca</string>
+    <string name="newCommencerPar">Commencer par</string>
+    <string name="startGauche">Start Gauche</string>
+    <string name="startDroite">Start Droite</string>
+    <string name="stopGauche">Stop Gauche</string>
+    <string name="stopDroite">Stop Droite</string>
+    <string name="valider">Valider</string>
+    <string name="annuler">Annuler</string>
+
+</resources>
