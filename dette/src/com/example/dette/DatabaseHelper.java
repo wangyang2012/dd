@@ -23,12 +23,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-//		String sql = "CREATE TABLE `tetee`.`tetee` (`date` DATE NOT NULL, `heure` TIME NOT NULL, `gauche` TIME NULL, `droite` TIME NULL, `debut` CHAR NULL, `pipi` TINYINT NULL, `caca` TINYINT NULL, PRIMARY KEY (`date`, `heure`));";
-		String sql = "CREATE TABLE `" + TABLENAME + "` (`" + col_date + "` DATE NOT NULL, `" + col_heure + "` TIME NOT NULL, `" + col_gauche + "` TIME NULL, `" + col_droite + "` TIME NULL, `" + col_debut + "` CHAR NULL, `" + col_pipi + "` TINYINT NULL, `" + col_caca + "` TINYINT NULL, PRIMARY KEY (`" + col_date + "`, `" + col_heure + "`));";
+		String sql = "CREATE TABLE `" + TABLENAME + "` (`" + col_date + "` DATE NOT NULL, `" + col_heure + "` TIME NOT NULL, `" + col_gauche + "` INT, `" + col_droite + "` INT, `" + col_debut + "` CHAR NULL, `" + col_pipi + "` TINYINT NULL, `" + col_caca + "` TINYINT NULL, PRIMARY KEY (`" + col_date + "`, `" + col_heure + "`));";
 		db.execSQL(sql);
 		
-//		String sqlInsert = "INSERT INTO " + TABLENAME + " VALUES ('2011-7-8', '25:00', '10:00', '15:00', 'G', TRUE, FALSE);";
-		String sqlInsert = "INSERT INTO `" + TABLENAME + "` (`" + col_date + "`, `" + col_heure + "`, `" + col_gauche + "`, `" + col_droite + "`, `" + col_debut + "`, `" + col_pipi + "`, `" + col_caca + "`) VALUES ('2014-10-10', '11:11', '10:00', '11:00', 'G', '1', '0');";
+		String sqlInsert = "INSERT INTO `" + TABLENAME + "` (`" + col_date + "`, `" + col_heure + "`, `" + col_gauche + "`, `" + col_droite + "`, `" + col_debut + "`, `" + col_pipi + "`, `" + col_caca + "`) VALUES ('2014-10-10', '11:11', '10', '11', 'G', '1', '0');";
 		db.execSQL(sqlInsert);
 	}
 

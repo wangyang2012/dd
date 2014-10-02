@@ -39,8 +39,6 @@
             android:inputType="time" />
     </TableRow>
 
-    <!-- durée -->
-
     <!-- gauche -->
 
     <TableRow android:layout_marginTop="@dimen/padding_small" >
@@ -107,25 +105,32 @@
         </RadioGroup>
     </TableRow>
 
+	<!-- pipi caca -->
+	
     <TableRow android:layout_marginTop="@dimen/padding_small" >
-
+
         <CheckBox
             android:id="@+id/newPipi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/col_pipi_title" />
-
+
         <CheckBox
             android:id="@+id/newCaca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="@string/col_caca_title" />
+
     </TableRow>
 
+	<!-- Start gauche/Droite -->
+	
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_large"
+        android:layout_marginTop="@dimen/padding_small"
         android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="2" >
@@ -145,10 +150,11 @@
             android:text="@string/startDroite" />
     </LinearLayout>
 
+	<!-- Valider/annuler -->
+	
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_large"
         android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="2" >

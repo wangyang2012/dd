@@ -154,7 +154,7 @@ public class DetteActivity extends Activity {
 		
 		/* Heure */
 		TextView tvHeure = (TextView) findViewById(R.id.newHeure);
-		SimpleDateFormat heureFormat = new SimpleDateFormat("hh:mm");
+		SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
 		tvHeure.setText(heureFormat.format(new Date()));
 
 		/* Gauche && Droite */
