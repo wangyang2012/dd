@@ -54,6 +54,9 @@ public class Dette {
 	public void setPipi(Integer pipi) {
 		this.pipi = (pipi == 1);
 	}
+	public void setPipi(Boolean pipi) {
+		this.pipi = pipi;
+	}
 	public String getCaca() {
 		if (caca != null && caca) {
 			return "X";
@@ -64,7 +67,9 @@ public class Dette {
 	public void setCaca(Integer caca) {
 		this.caca = (caca == 1);
 	}
-
+	public void setCaca(Boolean caca) {
+		this.caca = caca;
+	}
 	public Date getHeure() {
 		return heure;
 	}

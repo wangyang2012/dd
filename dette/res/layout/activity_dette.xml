@@ -158,12 +158,13 @@
         android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="2" >
-
+
         <Button
             android:id="@+id/newValider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1.10"
+            android:clickable="false"
             android:text="@string/valider" />
 
         <Button

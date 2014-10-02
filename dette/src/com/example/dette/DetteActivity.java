@@ -1,15 +1,17 @@
 package com.example.dette;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,8 @@ public class DetteActivity extends Activity {
 	private String timeUsedDroite;
 	private int timeUsedInsecGauche;
 	private int timeUsedInsecDroite;
+	private TextView tvDate;
+	private TextView tvHeure;
 	private TextView tvGauche;
 	private TextView tvDroite;
 	private Button btnGauche;
@@ -33,6 +37,14 @@ public class DetteActivity extends Activity {
 	
 	private RadioButton radioButtonGauche;
 	private RadioButton radioButtonDroite;
+	
+	private CheckBox pipi;
+	private CheckBox caca;
+	
+	private Button btnValider;
+	private Button btnAnnuler;
+	
+	private SQLiteDatabase db;
 
 	private Handler uiHandle = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -75,6 +87,7 @@ public class DetteActivity extends Activity {
 	
 	private void startGauche() {
 		isPausedGauche = false;
+		btnValider.setEnabled(true);
 		uiHandle.sendEmptyMessageDelayed(1, 1000);
 		if (isFirstStart) {
 			isGaucheFirst = true;
@@ -93,6 +106,7 @@ public class DetteActivity extends Activity {
 	
 	private void startDroite() {
 		isPausedDroite = false;
+		btnValider.setEnabled(true);
 		uiHandle.sendEmptyMessageDelayed(2, 1000);
 		if (isFirstStart) {
 			isGaucheFirst = false;
@@ -148,14 +162,12 @@ public class DetteActivity extends Activity {
 		isDroiteRunning = false;
 
 		/* Date */
-		TextView tvDate = (TextView) findViewById(R.id.newDate);
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		tvDate.setText(dateFormat.format(new Date()));
+		tvDate = (TextView) findViewById(R.id.newDate);
+		tvDate.setText(DateUtils.dateToString(new Date()));
 		
 		/* Heure */
-		TextView tvHeure = (TextView) findViewById(R.id.newHeure);
-		SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
-		tvHeure.setText(heureFormat.format(new Date()));
+		tvHeure = (TextView) findViewById(R.id.newHeure);
+		tvHeure.setText(DateUtils.heureToString(new Date()));
 
 		/* Gauche && Droite */
 		tvGauche = (TextView) findViewById(R.id.newGauche);
@@ -164,6 +176,12 @@ public class DetteActivity extends Activity {
 		/* Ordre */
 		radioButtonGauche = (RadioButton) findViewById(R.id.newParGauche);
 		radioButtonDroite = (RadioButton) findViewById(R.id.newParDroite);
+		
+		/* Pipi */
+		pipi = (CheckBox) findViewById(R.id.newPipi);
+		
+		/* Caca */
+		caca = (CheckBox) findViewById(R.id.newCaca);
 
 		/* Button Gauche */
 		btnGauche = (Button) findViewById(R.id.newStartGauche);
@@ -184,12 +202,13 @@ public class DetteActivity extends Activity {
 		});
 		
 		/* Valider */
-		Button btnValider = (Button) findViewById(R.id.newValider);
+		btnValider = (Button) findViewById(R.id.newValider);
+		btnValider.setEnabled(false);
 		btnValider.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
 				if (isPausedGauche && isPausedDroite) {
-					Toast.makeText(getApplicationContext(), "Commenc¨¦ par: " + getFirst(), Toast.LENGTH_SHORT).show();
+					writeRecord();
 					finish();
 				} else {
 					Toast.makeText(getApplicationContext(), "Pas encore fini!", Toast.LENGTH_SHORT).show();
@@ -211,11 +230,58 @@ public class DetteActivity extends Activity {
 		});
 	}
 	
+	protected void writeRecord() {
+		DatabaseHelper helper = new DatabaseHelper(getBaseContext());
+		db = helper.getWritableDatabase();
+		ContentValues values = new ContentValues();
+		
+		String date = tvDate.getText().toString();
+		if (date == null) {
+			date = DateUtils.dateToString(new Date());
+		}
+		
+		String heure = tvHeure.getText().toString();
+		if (heure == null) {
+			heure = DateUtils.heureToString(new Date());
+		}
+		
+		String gauche = tvGauche.getText().toString();
+		if (gauche == null || gauche.isEmpty()) {
+			gauche = "00:00";
+		}
+		
+		String droite = tvDroite.getText().toString();
+		if (droite == null || droite.isEmpty()) {
+			droite = "00:00";
+		}
+		
+		values.put(DatabaseHelper.col_date, date);
+		values.put(DatabaseHelper.col_heure, heure);
+		values.put(DatabaseHelper.col_gauche, gauche);
+		values.put(DatabaseHelper.col_droite, droite);
+		values.put(DatabaseHelper.col_debut, getFirst());
+		values.put(DatabaseHelper.col_pipi, pipi.isChecked() ? 1 : 0);
+		values.put(DatabaseHelper.col_caca, caca.isChecked() ? 1 : 0);
+		db.insert(DatabaseHelper.TABLENAME, null, values);
+	}
+	
+//	private Dette getDateFromView() {
+//		Dette dette = new Dette();
+//		dette.setDate(DateUtils.stringToDate(tvDate.getText().toString()));
+//		dette.setHeure(DateUtils.stringToHeure(tvHeure.getText().toString()));
+//		dette.setSeinGauche(DateUtils.minuteToInteger(tvGauche.getText().toString()));
+//		dette.setSeinDroite(DateUtils.minuteToInteger(tvDroite.getText().toString()));
+//		dette.setCommencer(getFirst());
+//		dette.setPipi(pipi.isChecked());
+//		dette.setCaca(caca.isChecked());
+//		return dette;
+//	}
+
 	private String getFirst() {
 		if (isFirstStart) {
-			return "rien";
+			return "N";
 		} else {
-			return isGaucheFirst ? "Gauche" : "Droite";
+			return isGaucheFirst ? "G" : "D";
 		}
 	}
 

@@ -26,6 +26,8 @@ public class MainActivity extends Activity {
 	
 	private SQLiteDatabase db;
 	
+	private SimpleAdapter adapter;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +79,7 @@ public class MainActivity extends Activity {
         }
         
        //创建SimpleAdapter适配器将数据绑定到item显示控件上  
-       SimpleAdapter adapter = new SimpleAdapter(this, data, R.layout.item, new String[]{"date", "heure", "sein_gauche", "sein_droite", "commencer", "pipi", "caca"}, new int[]{R.id.date, R.id.heure, R.id.sein_gauche, R.id.sein_droit, R.id.commencer, R.id.pipi, R.id.caca});  
+       adapter = new SimpleAdapter(this, data, R.layout.item, new String[]{"date", "heure", "sein_gauche", "sein_droite", "commencer", "pipi", "caca"}, new int[]{R.id.date, R.id.heure, R.id.sein_gauche, R.id.sein_droit, R.id.commencer, R.id.pipi, R.id.caca});
 
        //实现列表的显示  
        listView.setAdapter(adapter);  
