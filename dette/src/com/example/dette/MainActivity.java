@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +29,12 @@ public class MainActivity extends Activity {
 	private SQLiteDatabase db;
 	
 	private SimpleAdapter adapter;
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		doListView();
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,15 +85,12 @@ public class MainActivity extends Activity {
             item.put("caca", dette.getCaca());
             data.add(item);
         }
-        
+
        //创建SimpleAdapter适配器将数据绑定到item显示控件上  
        adapter = new SimpleAdapter(this, data, R.layout.item, new String[]{"date", "heure", "sein_gauche", "sein_droite", "commencer", "pipi", "caca"}, new int[]{R.id.date, R.id.heure, R.id.sein_gauche, R.id.sein_droit, R.id.commencer, R.id.pipi, R.id.caca});
 
        //实现列表的显示  
        listView.setAdapter(adapter);  
-       
-       //条目点击事件  
-       listView.setOnItemClickListener(new ItemClickListener());
 	}
 
 	private List<Dette> getData() {

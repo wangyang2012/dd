@@ -48,7 +48,7 @@ public class Dette {
 		if (pipi != null && pipi) {
 			return "X";
 		} else {
-			return "";
+			return " ";
 		}
 	}
 	public void setPipi(Integer pipi) {
@@ -61,7 +61,7 @@ public class Dette {
 		if (caca != null && caca) {
 			return "X";
 		} else {
-			return "";
+			return " ";
 		}
 	}
 	public void setCaca(Integer caca) {
