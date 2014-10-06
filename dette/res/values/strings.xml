@@ -1,9 +1,9 @@
 <resources>
 
-    <string name="app_name">TétéRecord</string>
+    <string name="app_name">TétéeRecord</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">TétéeRecord</string>
     <string name="btn_consultation">Consultation</string>
     <string name="btn_quitter">Quitter</string>
     <string name="btn_dette">Commecer</string>

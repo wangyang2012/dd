@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import com.example.teteeRecord.R;
 
 public class MainActivity extends Activity {
 	

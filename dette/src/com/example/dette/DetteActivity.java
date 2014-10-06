@@ -1,5 +1,7 @@
 package com.example.dette;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import android.app.Activity;
@@ -7,8 +9,6 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -20,6 +20,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.example.teteeRecord.R;
 
 public class DetteActivity extends Activity {
 
@@ -274,15 +276,8 @@ public class DetteActivity extends Activity {
 			heure = DateUtils.heureToString(new Date());
 		}
 		
-		String gauche = tvGauche.getText().toString();
-		if (gauche == null || gauche.isEmpty()) {
-			gauche = "00:00";
-		}
-		
-		String droite = tvDroite.getText().toString();
-		if (droite == null || droite.isEmpty()) {
-			droite = "00:00";
-		}
+		String gauche = DateUtils.formatHeure(tvGauche.getText().toString());
+		String droite = DateUtils.formatHeure(tvDroite.getText().toString());
 		
 		values.put(DatabaseHelper.col_date, date);
 		values.put(DatabaseHelper.col_heure, heure);
@@ -294,6 +289,7 @@ public class DetteActivity extends Activity {
 		db.insert(DatabaseHelper.TABLENAME, null, values);
 	}
 	
+
 	private String getFirst() {
 		if (radioButtonGauche.isChecked()) {
 			return "G";
