@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/editText1"
-            android:layout_width="wrap_content"
+            android:layout_width="90dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
@@ -19,7 +19,7 @@
 
 		<TextView
             android:id="@+id/editText7"
-            android:layout_width="wrap_content"
+            android:layout_width="50dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
@@ -27,35 +27,35 @@
 		
         <TextView
             android:id="@+id/editText3"
-            android:layout_width="wrap_content"
+            android:layout_width="60dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
             android:text="@string/col_gauche_title" />
         <TextView
             android:id="@+id/editText4"
-            android:layout_width="wrap_content"
+            android:layout_width="50dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
             android:text="@string/col_droite_title" />
         <TextView
             android:id="@+id/editText8"
-            android:layout_width="wrap_content"
+            android:layout_width="50dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
             android:text="@string/col_commencer_title" />
         <TextView
             android:id="@+id/editText5"
-            android:layout_width="wrap_content"
+            android:layout_width="40dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
             android:text="@string/col_pipi_title" />
        	<TextView
             android:id="@+id/editText6"
-            android:layout_width="wrap_content"
+            android:layout_width="50dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="@dimen/padding_small"
@@ -68,13 +68,6 @@
         android:layout_height="0dip"
         android:layout_weight="0.53"
         android:scrollbars="vertical" />
-    
-<!--     <TableLayout -->
-<!--         android:id="@+id/table" -->
-<!--         android:layout_width="fill_parent" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_weight="0.67" -->
-<!--         android:scrollbars="vertical" /> -->
     
     <Button
         android:id="@+id/btn_dette"

@@ -7,13 +7,18 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class DetteActivity extends Activity {
@@ -26,14 +31,14 @@ public class DetteActivity extends Activity {
 	private String timeUsedDroite;
 	private int timeUsedInsecGauche;
 	private int timeUsedInsecDroite;
-	private TextView tvDate;
-	private TextView tvHeure;
-	private TextView tvGauche;
-	private TextView tvDroite;
+	private EditText tvDate;
+	private EditText tvHeure;
+	private EditText tvGauche;
+	private EditText tvDroite;
 	private Button btnGauche;
 	private Button btnDroite;
 	private boolean isGaucheFirst;
-	private Boolean isFirstStart;
+	private boolean isFirstStart;
 	
 	private RadioButton radioButtonGauche;
 	private RadioButton radioButtonDroite;
@@ -87,7 +92,8 @@ public class DetteActivity extends Activity {
 	
 	private void startGauche() {
 		isPausedGauche = false;
-		btnValider.setEnabled(true);
+		btnValider.setEnabled(false);
+		btnDroite.setEnabled(false);
 		uiHandle.sendEmptyMessageDelayed(1, 1000);
 		if (isFirstStart) {
 			isGaucheFirst = true;
@@ -102,11 +108,14 @@ public class DetteActivity extends Activity {
 		isPausedGauche = true;
 		btnGauche.setText(R.string.startGauche);
 		isGaucheRunning = false;
+		btnValider.setEnabled(true);
+		btnDroite.setEnabled(true);
 	}
 	
 	private void startDroite() {
 		isPausedDroite = false;
-		btnValider.setEnabled(true);
+		btnValider.setEnabled(false);
+		btnGauche.setEnabled(false);
 		uiHandle.sendEmptyMessageDelayed(2, 1000);
 		if (isFirstStart) {
 			isGaucheFirst = false;
@@ -121,6 +130,8 @@ public class DetteActivity extends Activity {
 		isPausedDroite = true;
 		btnDroite.setText(R.string.startDroite);
 		isDroiteRunning = false;
+		btnValider.setEnabled(true);
+		btnGauche.setEnabled(true);
 	}
 
 	private void updateClockUI(boolean gauche) {
@@ -152,6 +163,7 @@ public class DetteActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dette);
 		
@@ -162,16 +174,33 @@ public class DetteActivity extends Activity {
 		isDroiteRunning = false;
 
 		/* Date */
-		tvDate = (TextView) findViewById(R.id.newDate);
+		tvDate = (EditText) findViewById(R.id.newDate);
 		tvDate.setText(DateUtils.dateToString(new Date()));
 		
 		/* Heure */
-		tvHeure = (TextView) findViewById(R.id.newHeure);
+		tvHeure = (EditText) findViewById(R.id.newHeure);
 		tvHeure.setText(DateUtils.heureToString(new Date()));
 
 		/* Gauche && Droite */
-		tvGauche = (TextView) findViewById(R.id.newGauche);
-		tvDroite = (TextView) findViewById(R.id.newDroite);
+		tvGauche = (EditText) findViewById(R.id.newGauche);
+		tvDroite = (EditText) findViewById(R.id.newDroite);
+		
+		
+		tvGauche.setOnKeyListener(new OnKeyListener() {
+			
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				stopGauche();
+				return false;
+			}
+		});
+		
+		tvDroite.setOnKeyListener(new OnKeyListener() {
+			
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				stopDroite();
+				return false;
+			}
+		});
 		
 		/* Ordre */
 		radioButtonGauche = (RadioButton) findViewById(R.id.newParGauche);
@@ -265,23 +294,11 @@ public class DetteActivity extends Activity {
 		db.insert(DatabaseHelper.TABLENAME, null, values);
 	}
 	
-//	private Dette getDateFromView() {
-//		Dette dette = new Dette();
-//		dette.setDate(DateUtils.stringToDate(tvDate.getText().toString()));
-//		dette.setHeure(DateUtils.stringToHeure(tvHeure.getText().toString()));
-//		dette.setSeinGauche(DateUtils.minuteToInteger(tvGauche.getText().toString()));
-//		dette.setSeinDroite(DateUtils.minuteToInteger(tvDroite.getText().toString()));
-//		dette.setCommencer(getFirst());
-//		dette.setPipi(pipi.isChecked());
-//		dette.setCaca(caca.isChecked());
-//		return dette;
-//	}
-
 	private String getFirst() {
-		if (isFirstStart) {
-			return "N";
+		if (radioButtonGauche.isChecked()) {
+			return "G";
 		} else {
-			return isGaucheFirst ? "G" : "D";
+			return "D";
 		}
 	}
 

@@ -25,9 +25,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		String sql = "CREATE TABLE `" + TABLENAME + "` (`" + col_date + "` DATE NOT NULL, `" + col_heure + "` TIME NOT NULL, `" + col_gauche + "` INT, `" + col_droite + "` INT, `" + col_debut + "` CHAR NULL, `" + col_pipi + "` TINYINT NULL, `" + col_caca + "` TINYINT NULL, PRIMARY KEY (`" + col_date + "`, `" + col_heure + "`));";
 		db.execSQL(sql);
-		
-		String sqlInsert = "INSERT INTO `" + TABLENAME + "` (`" + col_date + "`, `" + col_heure + "`, `" + col_gauche + "`, `" + col_droite + "`, `" + col_debut + "`, `" + col_pipi + "`, `" + col_caca + "`) VALUES ('2014-10-10', '11:11', '10', '11', 'G', '1', '0');";
-		db.execSQL(sqlInsert);
 	}
 
 	@Override

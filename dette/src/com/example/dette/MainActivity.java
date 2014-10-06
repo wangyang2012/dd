@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -27,6 +28,12 @@ public class MainActivity extends Activity {
 	private SQLiteDatabase db;
 	
 	private SimpleAdapter adapter;
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		doListView();
+	}
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,13 +70,10 @@ public class MainActivity extends Activity {
         List<Dette> dettes = getData();  
         List<HashMap<String, Object>> data = new ArrayList<HashMap<String,Object>>();
         
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
-        
         for(Dette dette : dettes){  
             HashMap<String, Object> item = new HashMap<String, Object>();
-            item.put("date", dateFormat.format(dette.getDate()));  
-            item.put("heure", heureFormat.format(dette.getHeure()));  
+            item.put("date", DateUtils.dateToString(dette.getDate()));  
+            item.put("heure", DateUtils.heureToString(dette.getHeure()));  
             item.put("sein_gauche", dette.getSeinGauche());
             item.put("sein_droite", dette.getSeinDroite());
             item.put("commencer", dette.getCommencer());
@@ -77,15 +81,12 @@ public class MainActivity extends Activity {
             item.put("caca", dette.getCaca());
             data.add(item);
         }
-        
+
        //创建SimpleAdapter适配器将数据绑定到item显示控件上  
        adapter = new SimpleAdapter(this, data, R.layout.item, new String[]{"date", "heure", "sein_gauche", "sein_droite", "commencer", "pipi", "caca"}, new int[]{R.id.date, R.id.heure, R.id.sein_gauche, R.id.sein_droit, R.id.commencer, R.id.pipi, R.id.caca});
 
        //实现列表的显示  
        listView.setAdapter(adapter);  
-       
-       //条目点击事件  
-       listView.setOnItemClickListener(new ItemClickListener());
 	}
 
 	private List<Dette> getData() {
@@ -119,8 +120,8 @@ public class MainActivity extends Activity {
 	    dette.setSeinGauche(Integer.valueOf(cursor.getInt(2)));
 	    dette.setSeinDroite(Integer.valueOf(cursor.getInt(3)));
 	    dette.setCommencer(cursor.getString(4));
-	    dette.setPipi(cursor.getInt(5));
-	    dette.setCaca(cursor.getInt(6));
+	    dette.setPipi(cursor.getInt(5) == 1);
+	    dette.setCaca(cursor.getInt(6) == 1);
 	    return dette;
 	  }
 	
