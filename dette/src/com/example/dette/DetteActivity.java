@@ -1,9 +1,8 @@
 package com.example.dette;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,7 +38,6 @@ public class DetteActivity extends Activity {
 	private EditText tvDroite;
 	private Button btnGauche;
 	private Button btnDroite;
-	private boolean isGaucheFirst;
 	private boolean isFirstStart;
 	
 	private RadioButton radioButtonGauche;
@@ -53,6 +51,7 @@ public class DetteActivity extends Activity {
 	
 	private SQLiteDatabase db;
 
+	@SuppressLint("HandlerLeak")
 	private Handler uiHandle = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -98,7 +97,6 @@ public class DetteActivity extends Activity {
 		btnDroite.setEnabled(false);
 		uiHandle.sendEmptyMessageDelayed(1, 1000);
 		if (isFirstStart) {
-			isGaucheFirst = true;
 			isFirstStart = false;
 			radioButtonGauche.setChecked(true);
 		}
@@ -120,7 +118,6 @@ public class DetteActivity extends Activity {
 		btnGauche.setEnabled(false);
 		uiHandle.sendEmptyMessageDelayed(2, 1000);
 		if (isFirstStart) {
-			isGaucheFirst = false;
 			isFirstStart = false;
 			radioButtonDroite.setChecked(true);
 		}
@@ -191,6 +188,10 @@ public class DetteActivity extends Activity {
 		tvGauche.setOnKeyListener(new OnKeyListener() {
 			
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (isFirstStart) {
+					isFirstStart = false;
+					radioButtonGauche.setChecked(true);
+				}
 				stopGauche();
 				return false;
 			}
@@ -199,6 +200,10 @@ public class DetteActivity extends Activity {
 		tvDroite.setOnKeyListener(new OnKeyListener() {
 			
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (isFirstStart) {
+					isFirstStart = false;
+					radioButtonDroite.setChecked(true);
+				}
 				stopDroite();
 				return false;
 			}
@@ -249,7 +254,7 @@ public class DetteActivity extends Activity {
 		});
 
 		/* Annuler */
-		Button btnAnnuler = (Button) findViewById(R.id.newAnnuler);
+		btnAnnuler = (Button) findViewById(R.id.newAnnuler);
 		btnAnnuler.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (isPausedGauche && isPausedDroite) {
@@ -276,8 +281,8 @@ public class DetteActivity extends Activity {
 			heure = DateUtils.heureToString(new Date());
 		}
 		
-		String gauche = DateUtils.formatHeure(tvGauche.getText().toString());
-		String droite = DateUtils.formatHeure(tvDroite.getText().toString());
+		Integer gauche = DateUtils.formatHeure(tvGauche.getText().toString());
+		Integer droite = DateUtils.formatHeure(tvDroite.getText().toString());
 		
 		values.put(DatabaseHelper.col_date, date);
 		values.put(DatabaseHelper.col_heure, heure);

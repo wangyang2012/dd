@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,15 +16,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
+
 import com.example.teteeRecord.R;
 
+@SuppressLint("SimpleDateFormat")
 public class MainActivity extends Activity {
 	
 	private SQLiteDatabase db;
@@ -130,16 +129,6 @@ public class MainActivity extends Activity {
     	Intent intent = new Intent(MainActivity.this, DetteActivity.class);
     	startActivity(intent);
     }
-    
-    private final class ItemClickListener implements OnItemClickListener{  
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  
-            ListView listView = (ListView) parent;  
-            @SuppressWarnings("unchecked")
-			HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);  
-            String heure = data.get("duree").toString();  
-            Toast.makeText(getApplicationContext(), heure, Toast.LENGTH_SHORT).show();  
-        }  
-    }  
 
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

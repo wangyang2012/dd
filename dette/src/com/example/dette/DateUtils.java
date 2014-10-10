@@ -1,15 +1,16 @@
 package com.example.dette;
 
-import java.text.DateFormat;
+import android.annotation.SuppressLint;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+@SuppressLint("SimpleDateFormat")
 public class DateUtils {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
-	private static SimpleDateFormat dureeFormat = new SimpleDateFormat("HH");
+	private static SimpleDateFormat dureeFormat = new SimpleDateFormat("HH:mm");
 	
 	public static String dateToString(Date date) {
 		return dateFormat.format(date);
@@ -43,25 +44,23 @@ public class DateUtils {
 	}
 	
 
-	public static String formatHeure(String str) {
+	public static Integer formatHeure(String str) {
 		if (str == null || str.isEmpty()) {
-			return "O";
+			return 0;
 		}
 		
 		Date min = null;
 		if (str.contains(":")) {
 			try {
 				min = heureFormat.parse(str);
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(min);
+				return cal.get(Calendar.MINUTE);
 			} catch (ParseException e) {
-				return "0";
+				return 0;
 			}
 		} else {
-			try {
-				min = dureeFormat.parse(str);
-			} catch (ParseException e) {
-				return "0";
-			}
+			return Integer.valueOf(str);
 		}
-		return dureeFormat.format(min);
 	}
 }
