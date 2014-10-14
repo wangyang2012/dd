@@ -10,7 +10,7 @@ import java.util.Date;
 public class DateUtils {
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat heureFormat = new SimpleDateFormat("HH:mm");
-	private static SimpleDateFormat dureeFormat = new SimpleDateFormat("HH:mm");
+	private static SimpleDateFormat dureeFormat = new SimpleDateFormat("mm:ss");
 	
 	public static String dateToString(Date date) {
 		return dateFormat.format(date);
@@ -52,7 +52,7 @@ public class DateUtils {
 		Date min = null;
 		if (str.contains(":")) {
 			try {
-				min = heureFormat.parse(str);
+				min = dureeFormat.parse(str);
 				Calendar cal = Calendar.getInstance();
 				cal.setTime(min);
 				return cal.get(Calendar.MINUTE);
