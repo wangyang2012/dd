@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.dette"
+    package="com.example.teteeRecord"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -12,7 +12,8 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.dette.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetteActivity"
+            android:name="com.example.dette.DetteActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main" >
         </activity>
     </application>
