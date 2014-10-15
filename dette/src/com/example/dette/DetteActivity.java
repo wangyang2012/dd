@@ -4,7 +4,10 @@ import java.util.Date;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
@@ -258,7 +261,23 @@ public class DetteActivity extends Activity {
 		btnAnnuler.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (isPausedGauche && isPausedDroite) {
-					finish();
+					AlertDialog.Builder builder = new Builder(DetteActivity.this);
+					builder.setMessage("Are you sure to reset?");
+					builder.setTitle("Confirmation Dialog");
+
+					builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							finish();
+						}
+					});	
+
+					builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
+					});	
+
+					builder.create().show();
 				} else {
 					Toast.makeText(getApplicationContext(), "Pas encore fini!", Toast.LENGTH_SHORT).show();
 				}
